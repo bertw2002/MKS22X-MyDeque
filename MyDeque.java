@@ -30,6 +30,8 @@ public class MyDeque<E>{
     return str;
   }
   public void addFirst(E element){
+    if (element == null) throw new NullPointerException("Parameter can't be null");
+
     if (size() != 0){
       if (end == -1){
         data[0] = element;
@@ -37,8 +39,10 @@ public class MyDeque<E>{
         end = 0;
       }
       else if (end != -1){
-
+        
       }
+    }else{
+      //resize();
     }
   }
   public void addLast(E element){
