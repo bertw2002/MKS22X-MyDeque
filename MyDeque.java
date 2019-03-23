@@ -7,25 +7,37 @@ public class MyDeque<E>{
     E[] d = (E[])new Object[10];
     data = d;
     start = -1;
-    size = 10;
+    size = 0;
     end = -1;
   }
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
-    size = initialCapacity
+    size = 0;
     start = -1;
     end = -1;
   }
   public int size(){
-    return data.length;
+    return size;
   }
   public String toString(){
     String str = "{ ";
-    for (int x = 0; x < size(); x++){
-      str += data[x];
-      str += " ";
+    if (size == 0) return "{ }";
+    else if (start < end){
+      for (int x = start; x < end; x++){
+        str += data[x];
+        str += " ";
+      }
+    }else{
+      for (int y = 0; y <= end; y++){
+        str += data[y];
+        str += " ";
+      }
+      for (int x = start; x < data.length; x++){
+        str += data [x] + " ";
+        str += " ";
+      }
     }
     return str;
   }
@@ -39,7 +51,7 @@ public class MyDeque<E>{
         end = 0;
       }
       else if (end != -1){
-        
+
       }
     }else{
       //resize();
