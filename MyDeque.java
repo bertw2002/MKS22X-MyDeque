@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -60,8 +61,20 @@ public class MyDeque<E>{
   public void addLast(E element){
 
   }
-  public E removeFirst(){ }
-  public E removeLast(){ }
-  public E getFirst(){ }
-  public E getLast(){ }
+  public E removeFirst(){
+    if (size == 0) throw new NoSuchElementException();
+
+  }
+  public E removeLast(){
+    if (size == 0) throw new NoSuchElementException();
+    
+  }
+  public E getFirst(){
+    if (size == 0) throw new NoSuchElementException("empty data");
+    return data[start];
+  }
+  public E getLast(){
+    if (size == 0) throw new NoSuchElementException("empty data");
+    return data[end];
+  }
 }
