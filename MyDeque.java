@@ -7,17 +7,17 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[10];
     data = d;
-    start = -1;
+    start = 0;
     size = 0;
-    end = -1;
+    end = 0;
   }
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
     size = 0;
-    start = -1;
-    end = -1;
+    start = 0;
+    end = 0;
   }
   public int size(){
     return size;
@@ -30,6 +30,7 @@ public class MyDeque<E>{
         str += data[x];
         str += " ";
       }
+      str += "}";
     }else{
       for (int y = 0; y <= end; y++){
         str += data[y];
@@ -39,24 +40,25 @@ public class MyDeque<E>{
         str += data [x] + " ";
         str += " ";
       }
+      str += "}";
     }
     return str;
   }
   public void addFirst(E element){
     if (element == null) throw new NullPointerException("Parameter can't be null");
-
-    if (size() != 0){
-      if (end == -1){
-        data[0] = element;
-        start = 0;
-        end = 0;
+    if (start == 0){
+      if (size >= data.length - 1){
+        //resize();
+      }else{
+        start = data.length-1;
+        data[data.length-1] = element;
       }
-      else if (end != -1){
-
-      }
-    }else{
-      //resize();
     }
+    else{
+      start--;
+      data[start] = element;
+    }
+    start++;
   }
   public void addLast(E element){
 
@@ -67,7 +69,7 @@ public class MyDeque<E>{
   }
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException();
-    
+
   }
   public E getFirst(){
     if (size == 0) throw new NoSuchElementException("empty data");
