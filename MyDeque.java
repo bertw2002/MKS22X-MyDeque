@@ -58,29 +58,43 @@ public class MyDeque<E>{
       start--;
       data[start] = element;
     }
-    start++;
+    size++;
   }
   public void addLast(E element){
     if (element == null) throw new NullPointerException("Parameter can't be null");
-    if (size == 0) {
+    if (size == data.length) //resize();
+    if (end == data.length) {
+     data[0] = element;
+     end = 1;
+    }
+    else{
       data[end] = element;
+      end++;
     }
-    else if (start > end) {
-     end++;
-     data[end] = element;
-    }
-     else if (size == data.length){
-      //  resize();
-      data[end++] = element;
-    }
+    size++;
   }
   public E removeFirst(){
     if (size == 0) throw new NoSuchElementException();
-
+    E first = data[start];
+    if (size != 1){
+      start++;
+    }else if(start == data.length - 1){
+      start = 0;
+    }
+    size--;
+    return first;
   }
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException();
-
+    E last = data[end];
+    if (size != 1) {
+      end--;
+    }
+    else if (end == 0){
+      end = data.length-1;
+    }
+    size--;
+    return last;
   }
   public E getFirst(){
     if (size == 0) throw new NoSuchElementException("empty data");
