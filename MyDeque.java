@@ -2,39 +2,27 @@ import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
-
   @SuppressWarnings("unchecked")
-  public void resize() {
-    E[] data1 = (E[]) new Object[2 * (data.length - 1)];
-    int index = size - start;
-    //if start < end, loop thru and set new data values to old.
-    if (start <= end) {
-      for (int x = start; x <= end; x++) {
-        data1[x] = data[x];
-      }
+  //REMEMBER TO MAKE PRIVATE
+  private void resize() {
+    int count = 0;
+    //twice the size + 1.
+    E[] data1 = (E[])new Object[data.length * 2 + 1];
+    for (int x = start; x < data.length; x++) {
+      //increment count and data index.
+      data1[count++] = data[x];
     }
-
-    else {
-      for (int x = 0; x < size; x++) {
-        if (start + x >= data.length) {
-          data1[x - data.length + start] = data[x + start - data.length];
-          data1[data1.length - index] = data[start + x];
-          index--;
-        }
-        else {
-        data1[data1.length - index] = data[start + x];
-        //TEST minus and plus..
-        index--;
-        }
-      }
-      //remember to minus index
-      start = data1.length - index;
+    for (int y = 0; y < start; y++) {
+      //increment count and data index.
+      data1[count++] = data[y];
     }
-
+    //set data equal to new one.
     data = data1;
+    //make sure to change because size is doubled.
+    end = count - 1;
   }
 
-
+//constructors
   public MyDeque(){
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[10];
@@ -51,9 +39,11 @@ public class MyDeque<E>{
     start = 0;
     end = 0;
   }
+
   public int size(){
     return size;
   }
+
   public String toString(){
     String str = "{";
     if (size == 0) return "{}";
@@ -62,16 +52,20 @@ public class MyDeque<E>{
         str += data[x];
         str += " ";
       }
+      //ending bracket to close
       str += "}";
     }else{
       for (int y = 0; y < end; y++){
         str += data[y];
+        //space after per K's directions.
         str += " ";
       }
       for (int x = start; x < data.length; x++){
         str += data[x];
+        //space after per K's directions.
         str += " ";
       }
+      //ending bracket to close
       str += "}";
     }
 
