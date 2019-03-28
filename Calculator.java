@@ -8,51 +8,54 @@ public class Calculator{
    //separates spaces, makes life easier.
    String[] arr = s.split(" ");
    for (int x = 0; x < arr.length; x++){
-     double addVal = 0.0;
      token.addLast(arr[x]);
-     //Number of operation.
-     String NumOrOp = token.removeLast();
-     if (NumOrOp.equals("*")) {
-       double val1 = Double.parseDouble(token.removeLast());
-       double val2 = Double.parseDouble(token.removeLast());
-
-       addVal = val2 * val1;
-       token.addLast("" + addVal);
+     //if fails, just getlast and return the Double.parseDouble(token.getLast());
+     try {
+       Double.parseDouble(token.getLast());
      }
-     else if (NumOrOp.equals("+")) {
-      double val1 = Double.parseDouble(token.removeLast());
-      double val2 = Double.parseDouble(token.removeLast());
-      addVal = val1 + val2;
-      token.addLast(addVal + "");
-     }
-     else if (NumOrOp.equals("/")) {
-       double val2 = Double.parseDouble(token.removeLast());
-       double val1 = Double.parseDouble(token.removeLast());
-       addVal = val1 / val2;
-       token.addLast(addVal + "");
-     }
-     else if (NumOrOp.equals("-")) {
-       double val2 = Double.parseDouble(token.removeLast());
-       double val1 = Double.parseDouble(token.removeLast());
-       addVal = val1 - val2;
-       token.addLast(addVal + "");
-     }
+     catch (NumberFormatException e) {
+       //Number or operation.
+       double addVal = 0.0;
+       String NumOrOp = token.removeLast();
+       //do the actual operations.
+       if (NumOrOp.equals("*")) {
+         double val1 = Double.parseDouble(token.removeLast());
+         double val2 = Double.parseDouble(token.removeLast());
 
+         addVal = val2 * val1;
+         token.addLast(addVal + "");
+       }
+       else if (NumOrOp.equals("+")) {
+        double val1 = Double.parseDouble(token.removeLast());
+        double val2 = Double.parseDouble(token.removeLast());
+        addVal = val1 + val2;
+        token.addLast(addVal + "");
+       }
+       else if (NumOrOp.equals("/")) {
+         double val2 = Double.parseDouble(token.removeLast());
+         double val1 = Double.parseDouble(token.removeLast());
+         addVal = val1 / val2;
+         token.addLast(addVal + "");
+       }
+       else if (NumOrOp.equals("-")) {
+         double val2 = Double.parseDouble(token.removeLast());
+         double val1 = Double.parseDouble(token.removeLast());
+         addVal = val1 - val2;
+         token.addLast(addVal + "");
+       }
 
-
-     else if (NumOrOp.equals("%")) {
-       double val2 = Double.parseDouble(token.removeLast());
-       double val1 = Double.parseDouble(token.removeLast());
-       addVal = val1 % val2;
-       token.addLast(addVal + "");
-     }
-     else{
-
+       else if (NumOrOp.equals("%")) {
+         double val2 = Double.parseDouble(token.removeLast());
+         double val1 = Double.parseDouble(token.removeLast());
+         addVal = val1 % val2;
+         token.addLast(addVal + "");
+       }
      }
    }
-   return 0.0;
+   //parse double it, not int.
+   return Double.parseDouble(token.getLast());
  }
  public static void main(String[] args) {
-   eval("11 3 - 4 + 2.5 *");
+   System.out.print(eval("11 3 - 4 + 2.5 *"));
  }
 }
