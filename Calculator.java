@@ -55,7 +55,4 @@ public class Calculator{
    //parse double it, not int.
    return Double.parseDouble(token.getLast());
  }
- public static void main(String[] args) {
-   System.out.print(eval("11 3 - 4 + 2.5 *"));
- }
 }
